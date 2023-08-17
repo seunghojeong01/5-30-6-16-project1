@@ -1,0 +1,31 @@
+create table Room(
+rno number primary key,
+room_type varchar2(10) not null,
+room_price number not null,
+max_value number not null
+);
+
+//
+create table RoomHistory(
+rno number not null, 
+room_clean varchar2(10) not null,
+dns_check varchar2(10)not null,
+check_in varchar2(10) not null,
+CONSTRAINT fk1_rno foreign key(rno) references Room(rno)
+REFERENCES room(rno) on delete cascade
+);
+
+create table Customer(
+rno number not null,
+cname varchar2(30), 
+cphone varchar2(13), 
+cemail varchar2(30),
+in_date DATE not null,
+out_date DATE not null,
+rsv_total number not null,
+CONSTRAINT fk2_rno foreign key(rno) references Room(rno)
+);
+
+
+alter table Customer add constraint unic unique(rno);
+alter table RoomHistory add constraint unihis unique(rno);

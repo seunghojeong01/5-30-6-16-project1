@@ -1,0 +1,26 @@
+CREATE TABLE MEMBER(
+mid VARCHAR2(20) primary key,
+mname VARCHAR2(30),
+pwd VARCHAR2(20),
+age NUMBER,
+admin_ck CHAR(1),
+phone VARCHAR2(13),
+reg_date DATE
+);
+
+
+CREATE TABLE T_MEMO(
+mid VARCHAR2(20),
+mno NUMBER Primary key,
+memo VARCHAR2(100),
+reg_date DATE,
+CONSTRAINT mid_fk FOREIGN KEY(mid)
+REFERENCES member(mid) ON DELETE CASCADE
+);
+
+create sequence memo_seq start with 1 increment by 1;
+alter sequence memo_seq maxvalue 900;
+
+
+insert into memo(mno,mid,pwd,reg_date) 
+values(memo_seq.nextVal,'Vill','a7385',sysdate)
